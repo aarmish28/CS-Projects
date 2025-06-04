@@ -1,0 +1,16 @@
+<!-- delete_confirmation.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Confirmation</title>
+</head>
+<body>
+    <h1>Delete Confirmation</h1>
+    <p>Are you sure you want to delete {{ instance.name }}?</p>
+    <form method="post" action="{% url 'delete' id=instance.id %}">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+    <a href="{% url 'index' %}">Cancel</a> <!-- Provide a link to some other view if the user decides to cancel the deletion -->
+</body>
+</html>

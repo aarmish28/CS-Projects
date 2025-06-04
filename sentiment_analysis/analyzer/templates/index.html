@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis with Stars</title>
+    <style>
+       
+        .input-box {
+            border: 2px solid #333; /* Set border style */
+            padding: 20px; /* Add some padding for better spacing */
+            margin-top: 20px; /* Adjust margin for spacing */
+            border: 2px solid rgb(58, 218, 9); 
+            padding: 20px; 
+            margin-top: 40px; 
+            margin-left:170px;
+            width: 1000px;
+            
+            padding: 20px 25px;
+            border-radius: 3px;
+            box-shadow: 0 0 8px rgb(42, 251, 105) , 0 0 4px #9fff8f;
+        }
+
+        .submit-button {
+          
+            box-shadow: 0 0 8px rgb(0, 255, 4) , 0 0 4px #1aff00; 
+            color: white;
+            background-color: rgba(255, 255, 255, 0);
+            width: 230px;
+            height: 40px;
+            margin: 10px auto;
+            border-radius: 10px;
+            border: #1aff00;
+        }
+  
+        body {
+            background-image: url(https://i.pinimg.com/originals/c5/9a/d2/c59ad2bd4ad2fbacd04017debc679ddb.gif);
+               background-repeat: no-repeat;
+               background-attachment: fixed;
+               background-size: cover;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 20px;
+            color: whitesmoke;
+        }
+        header {
+    color: #ffffff;
+    background-image: linear-gradient(#152c17 0%, #21392edf);
+    box-shadow: 0 0 8px rgb(13, 255, 0), 0 0 4px #09ff00;
+    margin-top: 5px;
+    text-align: center;
+    text-shadow: 0 0 8px rgb(18, 200, 24), 0 0 4px #1c9c0e;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+}
+
+h1 {
+    margin: 5px; 
+}
+        
+    </style>
+</head>
+<body>
+    <header >
+        <h1>Sentiment Analysis</h1>
+    </header>
+    <div class="input-box"> 
+    <h1 style="text-align: center;text-decoration: underline dashed rgb(50, 255, 47);text-shadow: 0 0 8px rgb(131, 149, 134) , 0 0 4px #758e72;">Write A Review</h1>
+    <form method="post" action="{% url 'analyze' %}">
+        {% csrf_token %}
+       
+        <label style="font-size: 30px;" for="review">Enter your review:</label><br><br>
+        <textarea id="review" name="review" rows="9" cols="50"  style="box-shadow: 0 0 8px rgb(0, 255, 76) , 0 0 4px #6cff52;font-size: 20px;border: #09ff00;"></textarea><br>
+        <input style="font-weight: bolder;font-size: large;margin-top: 30px;"  class="submit-button" type="submit" value="Analyze">
+    </form>
+</div>
+</body>
+</html>

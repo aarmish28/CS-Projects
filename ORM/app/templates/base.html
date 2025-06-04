@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Website{% endblock %}</title>
+    <style>
+        /* Reset some default styles */
+body, h1, h2, p, ul, form {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("https://images.pexels.com/photos/2004166/pexels-photo-2004166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-size: cover;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-image: linear-gradient(#342d34 0%, #17131cdf);
+    box-shadow: 0px 0px 10px rgb(119, 0, 255);
+    color: #ffffff;
+}
+
+header {
+   
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav {
+    margin-top: 20px;
+    color: #ffffff;
+   
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+   
+}
+
+nav li {
+    margin: 0 15px;
+   
+}
+
+/* Form styles */
+.form-container {
+    padding: 20px;
+    background-image: linear-gradient(#342d3486 0%, #17131c7d);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+}
+
+.form-title {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 150px;
+      font-weight: bolder;
+      font-size: 20px;
+      color: rgb(255, 255, 255);
+      padding: 10px 10px 0px 4px;
+    
+}
+
+.form-input {
+    border-radius: 10px;
+      padding: 10px;
+      margin-top: 15px;
+      width: 35%;
+      border: none;
+      outline: none;
+}
+
+.form-button {
+    background-color: #007bff;
+    color: #fff;
+   
+    cursor: pointer;
+    width: 230px;
+    height: 40px;
+    margin: 10px auto;
+    border-radius: 10px;
+      padding: 10px;
+      margin-top: 25px;
+}
+
+.form-button:hover {
+    background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+    <header style="color: #ffffff;background-image: linear-gradient(#89abb1 0%, #213139df);box-shadow: 0 0 8px rgb(0, 213, 255) , 0 0 4px #00ccff;margin-top: 5px;">
+        <h1>My Website</h1>
+        <nav >
+            <ul>
+                <li><a href="{% url 'form_list' %}">Forms</a></li>
+                <li><a href="{% url 'create_form' %}">Create Form</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container" style="margin-top: 35px;">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer  style="text-shadow: 0 0 8px rgb(255, 128, 0) , 0 0 4px #ab6e0b; color: #ffffff;">
+        <p>&copy; 2023 My Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <style>
+          body {
+              background-image: url(peakpx.jpg);
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-size:auto;
+          }
+          #loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1001;
+    }
+
+    #loader-wrapper .loader-section {
+      position: fixed;
+      top: 0;
+      width: 51%;
+      height: 100%;
+      background: #000000;
+      z-index: 1000;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+
+    #loader-wrapper .loader-section.section-left {
+      left: 0;
+    }
+
+    #loader-wrapper .loader-section.section-right {
+      right: 0;
+    }
+
+    #loader {
+      display: block;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      width: 150px;
+      height: 150px;
+      margin: -75px 0 0 -75px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #ff0404;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+      z-index: 99999;
+    }
+
+    #loader:before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #06fbff;
+      -webkit-animation: spin 3s linear infinite;
+      animation: spin 3s linear infinite;
+    }
+
+    #loader:after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #f700ff;
+      -webkit-animation: spin 1.5s linear infinite;
+      animation: spin 1.5s linear infinite;
+    }
+
+    .loaded #loader-wrapper {
+      visibility: hidden;
+      -webkit-transform: translateY(-100%);
+      transform: translateY(-100%);
+      -webkit-transition: all 0.3s 1s ease-out;
+      transition: all 0.3s 1s ease-out;
+    }
+
+    .loaded #loader-wrapper .loader-section.section-left {
+      -webkit-transform: translateX(-100%);
+      transform: translateX(-100%);
+      -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    .loaded #loader-wrapper .loader-section.section-right {
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+      -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    .loaded #loader {
+      opacity: 0;
+      -webkit-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+    }
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    .loaded #loader-wrapper {
+      visibility: hidden;
+      transform: translateY(-100%);
+    }
+
+    .loaded #loader {
+      opacity: 0.2;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function () {
+        document.querySelector("body").classList.add("loaded");
+      }, 10)
+    });
+  </script>
+
+   
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+      </div>
+  
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+    <div class="container-fluid">
+      <a class="navbar-brand" href="website.html">
+        <img src="Capture5.JPG"class="me-2" height="30" width="30" alt="DBZ Logo" loading="lazy" />
+        <small>COD<strong class="d-inline-block mb-2 text-light">EX</strong></small>
+
+      </a>
+      
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="website.html"><i class="bi bi-house"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="about.html"><i class="bi bi-person"></i> About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="pricing.html"><i class="bi bi-coin"></i> Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="careers.html"><i class="bi bi-paperclip"></i>  Careers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="team.html"><i class="bi bi-people"></i> Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="contactus.html"><i class="bi bi-people"></i> Contact Us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-laptop"></i> 
+              Technologies
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="ai.html">AI</a></li>
+              <li><a class="dropdown-item " href="gamedevelopment.html">Game Development</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="web.html">Web Development</a></li>
+            </ul>
+          </li>
+         
+        
+
+      </ul>
+      <form class="d-flex">
+        <input class="form-control ms-2" type="search" placeholder="Search" aria-label="Search">
+        
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+      <div class="mx-2">
+        <a class="btn btn-outline-light btn-sm me-1" href="login.html" role="button"><i class="bi bi-person-badge"></i>Login</a>
+        <a class="btn btn-outline-light btn-sm me-2" href="role.html" role="button"><i class="bi bi-pass"></i> Signup</a>
+      </ul>
+        
+      </div>
+    </div>
+    </nav>
+
+   <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+-->
+
+
+
+  <div id="carouselExampleCaptions" class="carousel slide mx-3 mt-4" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="bd-placeholder-img" width="1550" height="520" src="6.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <b><h4  class="text-decoration-underline">Welcome to Game Development</h4></b>
+          <p class=" text-warning">We are providing Game Development Services.</p>
+          <button class="btn btn-success">C++</button>
+          <button class="btn btn-danger">Game Design</button>
+          <button
+            class="btn btn-primary">Unity Developer</button>
+
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="bd-placeholder-img" width="1550" height="520" src="R.png" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <b><h4 class="text-decoration-underline">Welcome to Web Development</h4></b>
+          <p class="text-danger">We are providing Web Development Services</p>
+          <button class="btn btn-warning">Front End Development</button>
+          <button class="btn btn-danger">Backend Development</button>
+            <button class="btn btn-info">Full Stack Development</button>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="bd-placeholder-img" width="1550" height="520" src="4.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <b><h4 class="text-decoration-underline">Welcome to AI</h4></b>
+          <p class="text-success">We are Future</p>
+          <button class="btn btn-warning">Robotics</button>
+          <button class="btn btn-success">Deep Learning</button>
+
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+   <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+-->
+
+  
+
+
+  <div class="container">
+    <div class="row mb-2 my-4">
+      <div class="col-md-6">
+        <div class="row g-0 border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-dark">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-success">Science</strong>
+            <h3 class="mb-0 text-white">Web Developer</h3>
+            <div class="mb-1 text-muted">March 12</div>
+            <p class="card-text mb-auto text-white">Web developers usually fall under one of three categories: back-end developers,
+              front-end developers, and full-stack developers. Some web developers also work as webmasters.</p>
+            <b><a href="#" class="stretched-link text-success">Continue reading</a></b>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <img
+              src="9.jpg"
+              class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+
+          </div>
+        </div>
+      </div> 
+      <div class="col-md-6">
+        <div class="row g-0 border-dark rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-dark">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-success">Technology</strong>
+            <h3 class="mb-0  text-white">Game Design</h3>
+            <div class="mb-1 text-muted">March 11</div>
+            <p class="mb-auto text-white">Game design is the process of creating and shaping the mechanics, systems, and rules of a
+              game. Games can be created for entertainment, education, exercise, or experimental purposes. </p>
+           <b><a href="#" class="stretched-link text-success">Continue reading</a></b>
+          </div>
+          <div class="col-auto d-none d-lg-block bg-dark ">
+            <img src="8 copy.jpg" class="img-thumbnail" width="304" height="236">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav aria-label="Page navigation example ">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link text-success" href="website.html">Previous</a></li>
+      <li class="page-item"><a class="page-link text-success" href="about.html">1</a></li>
+      <li class="page-item"><a class="page-link text-success" href="contactus.html">2</a></li>
+      <li class="page-item"><a class="page-link text-success" href="pricing.html">3</a></li>
+      <li class="page-item"><a class="page-link text-success" href="team.html">4</a></li>
+      <li class="page-item"><a class="page-link text-success" href="careers.html">5</a></li>
+
+      <li class="page-item"><a class="page-link text-success" href="#">Next</a></li>
+    </ul>
+  </nav>
+  <div class="mx-2 mb-4 d-flex justify-content-end">
+    <button class="btn btn-outline-light me-1" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+
+    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</button>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-person-badge"></i>  Login</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body" style="background: linear-gradient(rgb(47, 167, 236),rgb(92, 92, 92));">
+<form>
+<div class="mb-3">
+<label for="exampleInputEmail1" class="form-label  text-dark">Email address</label>
+<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+<div id="emailHelp" class="form-text text-light">We'll never share your email with anyone else.</div>
+</div>
+<div class="mb-3">
+<label for="exampleInputPassword1" class="form-label text-dark">Password</label>
+<input type="password" class="form-control" id="exampleInputPassword1">
+</div>
+<div class="mb-3 form-check">
+<input type="checkbox" class="form-check-input text-light" id="exampleCheck1">
+<label class="form-check-label text-dark" for="exampleCheck1 ">Remember me</label>
+</div>
+<button type="submit" class="btn btn-dark">Submit</button>
+</form>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+<button type="button" class="btn btn-dark">Save changes</button>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header" >
+<h5 class="modal-title text-end" id="exampleModalLabel"><i class="bi bi-pass"></i> Sign Up</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body" style="background:linear-gradient(#248080, #000000)">
+<form>
+<div class="mb-3">
+<label for="exampleInputEmail1" class="form-label text-light"><b>Email address</b></label>
+<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+<div id="emailHelp" class="form-text text-light"><strong>We'll never share your email with anyone else </strong></div>
+</div>
+<div class="mb-3">
+<label for="exampleInputPassword1" class="form-label text-light"><strong>Password</strong></label>
+<input type="password" class="form-control" id="exampleInputPassword1">
+</div>
+<div class="mb-3">
+<label for="exampleInputEmail1" class="form-label text-light"><strong>Confirm password</strong></label>
+<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+<div id="emailHelp" class="form-text"></div>
+</div>
+<div class="mb-3">
+<label for="exampleInputEmail1" class="form-label text-light"><strong>City</strong></label>
+<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+<div id="emailHelp" class="form-text"></div>
+</div>
+<div class="mb-3 form-check">
+<input type="checkbox" class="form-check-input" id="exampleCheck1">
+<label class="form-check-label text-light" for="exampleCheck1"><strong>I agree to trems and conditions.</strong></label>
+</div>
+<button type="submit" class="btn btn-outline-light">Register</button>
+</form>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+<button type="button" class="btn btn-outline-dark">Save changes</button>
+</div>
+</div>
+</div>
+</div>
+  </div>
+</div>
+
+<!-- End of .container -->
+  
+
+
+
+
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+-->
+  <footer class="text-center text-lg-start text-white" style="background-color: black">
+
+    <div class="container p-4 pb-0">
+
+        <section class="">
+
+            <div class="row">
+
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">
+                        Codex
+                    </h6>
+                    <p>
+                        Codex offers courses i different fields of CS such as Game Development,Web Development,AI and its studies
+                    </p>
+                </div>
+
+
+                <hr class="w-100 clearfix d-md-none" />
+
+
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+                    <p>
+                        <a class="text-white">Game Development</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Web Developer</a>
+                    </p>
+                    <p>
+                        <a class="text-white">AI</a>
+                    </p>
+                    
+                </div>
+
+
+                <hr class="w-100 clearfix d-md-none" />
+
+
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">
+                        Support
+                    </h6>
+                    <p>
+                        <a class="text-white">Support hub</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Technical Problem</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Password Reset</a>
+                    </p>
+                    <p>
+                        <a class="text-white">Live Chat</a>
+                    </p>
+                </div>
+
+
+                <hr class="w-100 clearfix d-md-none" />
+
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                    <p><i class="fas fa-home mr-3"></i> Cantt, Lahore</p>
+                    <p><i class="fas fa-envelope mr-3"></i> Codex@gmail.com</p>
+                    <p><i class="fas fa-phone mr-3"></i> 111-222-333</p>
+                    <p><i class="fas fa-print mr-3"></i> 111-222-333</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <hr class="my-3">
+
+
+        <section class="p-3 pt-0">
+            <div class="row d-flex align-items-center">
+
+                <div class="col-md-7 col-lg-8 text-center text-md-start">
+
+                    <div class="p-3">
+                        © 2023 Copyright:
+                        <a class="text-white" href="">Codex</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</footer>
+
+</div>
+
+
+
+
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+-->
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</div>
+
+
+
+
+</div>
+<div class="progress">
+  <div class="progress-bar w-100 progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">WEBSITE END</div>
+</div>
+
+</body>
+
+</html>

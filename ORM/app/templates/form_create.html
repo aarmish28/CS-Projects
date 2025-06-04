@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="form-container">
+    <h2 class="form-title" style="text-shadow: 0 0 8px rgb(255, 128, 0) , 0 0 4px #ab6e0b; font-size: 33px; color: #ffffff;">Create Form</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label class="form-label" for="title"  style="text-shadow: 0 0 8px rgb(21, 0, 255) , 0 0 4px #0b30ab; font-size: 23px; color: #ffffff;">Title:</label>
+        <input class="form-input" type="text" name="title" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="description"  style="text-shadow: 0 0 8px rgb(21, 0, 255) , 0 0 4px #0b30ab; font-size: 23px; color: #ffffff;">Description:</label>
+        <textarea class="form-input" name="description" required></textarea>
+      </div>
+      <button class="form-button" type="submit" style="box-shadow: 0 0 8px rgb(21, 0, 255) , 0 0 4px #161a78; color: #ffffff;background-image: linear-gradient(#beb5ff 0%, #7f83eddf);font-size: large;">Create</button>
+    </form>
+  </div>
+{% endblock %}

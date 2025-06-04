@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Query Examples</title>
+</head>
+<body>
+    <h1>All Books</h1>
+    <ul>
+        {% for book in all_books %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Recent Books</h1>
+    <ul>
+        {% for book in recent_books %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Books by J.K. Rowling</h1>
+    <ul>
+        {% for book in author_books %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Filtered Books</h1>
+    <ul>
+        {% for book in filtered_books %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <h1>Number of Books</h1>
+    <p>{{ num_books }}</p>
+
+    <h1>Average Price of Books</h1>
+    <p>{{ average_price.price__avg }}</p>
+</body>
+</html>

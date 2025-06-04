@@ -1,0 +1,133 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body {
+           background-image: url("{% static '3.jpg' %}");
+           background-repeat: no-repeat;
+           background-attachment: fixed;
+           background-size: cover;
+       }
+       .data{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       }
+       input{
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 15px;
+        width: 35%;
+        border: none;
+        outline: none;
+       }
+       input:focus{
+        border: #ccc;
+        transform: scale(1.02);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+       }
+       ::placeholder{
+        padding-left: 20px;
+       }
+       input:focus + .placeholder
+      {
+        top: -10px;
+        color: #04AA6D;
+        background-color: #fff;
+      }
+      label{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 150px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: black;
+        padding: 10px 10px 0px 4px;
+      }
+    form{
+      display: flex;
+      justify-content: right;
+      flex-direction: column;
+      margin-top: 50px;
+      box-sizing: border-box;
+      padding: 20px;
+    
+    }
+    button{
+      width: 230px;
+      height: 40px;
+      margin: 10px auto;
+     
+     
+    }
+    select{
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 15px;
+        width: 35%;
+        border: none;
+        outline: none;
+    }
+  
+       </style>
+       </head>
+
+   
+    <body>
+        <div class="container mt-3 text-center text-white">
+            <h1 class="text-warning" style="text-shadow: 0 0 8px rgb(255, 145, 0) , 0 0 4px #ff9900;"><i class="bi bi-person-check-fill"></i> Adding Employee Attendance</h1>
+            <hr>
+            <form action="/attendance" method="post">
+                {% csrf_token %}
+                <div class="data"><label for="employee" class="text-white" style="text-shadow: 0 0 8px rgb(255, 145, 0) , 0 0 4px #ff9900; font-size: 26px;"><b>Employee:</b></label> <br>
+                <select id="employee" name="employee" required >
+                    {% for employee in employees %}
+                        <option value="{{ employee.id }}">{{ employee.first_name }} {{ employee.last_name }} {{employee.phone}}</option>
+                    {% endfor %}
+                </select><br><br></div>
+        
+                <div class="data"><label for="date" class="text-white" style="text-shadow: 0 0 8px rgb(255, 145, 0) , 0 0 4px #ff9900;font-size: 26px"><b>Date:</b></label> <br>
+                <input type="date" id="date" name="date" value="{{ date }}"> <br><br></div>
+        
+                <div class="data"><label for="status" class="text-white" style="text-shadow: 0 0 8px rgb(255, 145, 0) , 0 0 4px #ff9900;font-size: 26px"><b>Status:</b></label><br>
+                <select class=" mt-3 text-center" id="status" name="status">
+                    <option value="present">Present</option>
+                    <option value="absent">Absent</option>
+                    <option value="late">Late</option>
+                </select><br></div>
+        
+                <hr><br>
+                <button type="submit" class="btn btn-warning text-white" style="box-shadow: 0 0 8px rgb(255, 0, 0) , 0 0 4px rgb(255, 0, 0);"><i class="bi bi-person-check-fill"></i> Add Attendance</button>
+            </form>
+        </div>
+    
+     <div class="container mt-3 text-center" style="width: 650px;" ><h1 class="text-white bg-light" style="text-shadow: 0 0 8px rgb(255, 145, 0) , 0 0 4px #ff9900; background-image: linear-gradient(#ffe600 0%, #f87c2fdf);"><i class="bi bi-yelp"></i> View Attendence</h1>
+                  <hr>
+                  <a href="/viewattendance" class="btn btn-light"  style="box-shadow: 0 0 8px rgb(255, 230, 0) , 0 0 4px rgb(255, 247, 0);color: #db8301; width: 250px; height: 40px;font-size: 18px" role="button"><i class="bi bi-card-checklist"></i> View Attendence</a>
+                  </div>
+    
+    
+    
+        
+    
+        <!-- Optional JavaScript; choose one of the two! -->
+    
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <!--
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        -->
+    </body>
+    </html>

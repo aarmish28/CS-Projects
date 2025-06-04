@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>University  Employee Management System</title>
+    <style>
+      body {
+         background-image: url(https://images.pexels.com/photos/13620267/pexels-photo-13620267.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-size: cover;
+     }
+    .data{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       }
+       input{
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 10px;
+        width: 40%;
+        border: none;
+        outline: none;
+       }
+       input:focus{
+        border: #ccc;
+        transform: scale(1.02);
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+       }
+       ::placeholder{
+        padding-left: 20px;
+       }
+       input:focus + .placeholder
+      {
+        top: -10px;
+        color: #04AA6D;
+        background-color: #fff;
+      }
+      label{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 150px;
+        font-weight: bolder;
+        font-size: 20px;
+        color: rgb(255, 255, 255);
+        padding: 10px 10px 0px 4px;
+      }
+    form{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    
+    }
+    button{
+      width: 200px;
+      margin: 10px auto;
+    }
+
+     </style>
+  </head>
+  <body>
+    <div class="container mt-4  text-center text-white">
+    <h1  style="text-shadow: 0 0 8px rgb(55, 0, 255) , 0 0 4px #203cf4;"><i class="bi bi-person-lines-fill"></i> Filter an Employee from System</h1>
+    <hr>
+    <form action="/filter_emp" method="post">
+      {% csrf_token %}
+      <div class="data"><label for="name" class="form-label mb-2" style="text-shadow: 0 0 8px rgb(55, 0, 255) , 0 0 4px #203cf4;text-align: start;" ><b>First/Last Name</b></label><br>
+          <input type="text" id="name" name="name" placeholder="Enter your First/Last Name" value="{{name}}"><br><br></div>
+          
+          <div class="data"><label for="dept" class="form-label" style="text-shadow: 0 0 8px rgb(55, 0, 255) , 0 0 4px #203cf4;"><b>Department</b></label><br>
+          <input type="text" id="dept" name="dept" placeholder="Enter your Department" value="{{dept}}"><br><br></div>
+          
+          <div class="data"><label for="role" class="form-label" style="text-shadow: 0 0 8px rgb(55, 0, 255) , 0 0 4px #203cf4;"><b>Role</b></label><br>
+          <input type="text" id="role" name="role" placeholder="Enter your  Role" value="{{role}}" style=" margin-top: 20px;"><br></div>
+          <br>
+          
+          <button type="submit" class="btn btn-info text-white" style="box-shadow: 0 0 8px rgb(55, 0, 255) , 0 0 4px #203cf4;text-shadow: 0 0 8px rgb(203, 190, 249) , 0 0 4px #7d7f88;"><i class="bi bi-person-lines-fill"></i> Filter the Employee</button>
+
+    
+</div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="form-container" >
+    <h2 class="form-title" style="text-shadow: 0 0 8px rgb(255, 0, 0) , 0 0 4px #ab0b0b; color: #ffffff;">Delete Form</h2>
+    <p>Are you sure you want to delete the form "{{ form.title }}"?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button class="form-button" type="submit" style="box-shadow: 0 0 8px rgb(255, 0, 0) , 0 0 4px #ab0b0b; color: #2f0202;background-image: linear-gradient(#e2b8b8 0%, #ed7f7fdf);">Delete</button>
+    </form>
+  </div>
+{% endblock %}

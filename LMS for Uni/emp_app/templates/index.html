@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <title>University Employee Management System</title>
+  <style>
+    body {
+      background-image: url(https://img.freepik.com/free-photo/futuristic-smart-city-with-5g-global-network-technology_53876-98438.jpg?w=2000&t=st=1686317273~exp=1686317873~hmac=16e43933a7d0b3fc77dde048d63520c8ca240ea938e1601bc636a286ee9e4da0);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container text-center text-white mt-3">
+    <h1 style="text-shadow: 0 0 4px rgb(12, 4, 255) , 0 0 4px #1c3aff;"><i class="bi bi-house-check-fill"></i>
+      University Employee Management System</h1>
+    <hr>
+    <a href="/view_all_emp" class="btn btn-success me-2" role="button"
+      style="box-shadow: 0 0 8px rgb(255, 255, 255);"><i class="bi bi-arrow-down-circle-fill"></i> View All Employee</a>
+    <a href="/add_emp" class="btn btn-danger me-2" role="button" style="box-shadow: 0 0 8px rgb(255, 255, 255);"><i
+        class="bi bi-person-fill-add"></i> Add an Employee</a>
+    <a href="/remove_emp" class="btn btn-primary me-2" role="button" style="box-shadow: 0 0 8px rgb(255, 255, 255)"><i
+        class="bi bi-person-fill-dash"></i> Remove Employee</a>
+    <a href="/filter_emp" class="btn btn-warning" role="button" style="box-shadow: 0 0 8px rgb(255, 255, 255);"><i
+        class="bi bi-person-lines-fill"></i> Filter Employee Information</a>
+  </div>
+
+  <div class="container mt-3 text-center  mt-4" style="width: 600px;color: #001a9c">
+    <h1 class=" text text-center " style="color: #001a9c;background-image: linear-gradient(#98bff1 0%, #6099eedf); height: 55px;box-shadow: 0 0 8px rgb(0, 26, 255);"><i class="bi bi-book-fill"></i> Employee Books Details</h1>
+    <hr>
+    <a class="btn btn-primary" style="box-shadow: 0 0 8px rgb(0, 26, 255);background-color: #054292;" href="{% url 'aarmish' %}" role="button"><i class="bi bi-book-fill"></i> Employee Books</a>
+  </div>
+  <div class="container mt-4 text-center" style="width: 600px;color: #ff0000">
+    <h1 class="text" style="color: #b50707;background-image: linear-gradient(#fbabab 0%, #db7272df); height: 55px;box-shadow: 0 0 8px rgb(202, 4, 4);"><i class="bi bi-people-fill"></i> Employee Meeting Details</h1>
+    <hr>
+    <a href="/employeemeeting" class="btn btn-danger" style="box-shadow: 0 0 8px rgb(255, 0, 0);background-color: #863434df;" role="button"><i class="bi bi-people-fill"></i> Meeting
+      Details</a>
+      <div class="container mt-4 text-center" style="width: 600px;color: #00ff11">
+        <h1 class="text" style="color: #069e10;background-image: linear-gradient(#bbfbb6 0%, #95e88cdf); height: 55px;box-shadow: 0 0 8px rgb(23, 191, 4);"><i class="bi bi-currency-dollar"></i> Employee Expenses Details</h1>
+        <hr>
+        <a href="/employeeexpenses" class="btn btn-success" style="box-shadow: 0 0 8px rgb(77, 255, 0);background-color: #18760cdf;" role="button"><i class="bi bi-currency-dollar"></i> Expenses</a>
+  </div>
+  <div class="container mt-4 text-center" style="width: 600px;color: #f6ff00">
+    <h1 class="text" style="color: #898e03;background-image: linear-gradient(#ebefa7 0%, #c2cb72df); height: 55px;box-shadow: 0 0 8px rgb(242, 255, 0);"><i class="bi bi-person-workspace"></i> Employee Training Details</h1>
+    <hr>
+    <a href="/employeetraining" class="btn btn-warning text-white" style="box-shadow: 0 0 8px rgb(221, 255, 0);background-color: #86880cdf;" role="button"><i class="bi bi-person-workspace"></i> Training</a>
+</div>
+<div class="container mt-4 text-center" style="width: 600px;color: #ff0090">
+  <h1 class="text" style="color: #7c0c5b;background-image: linear-gradient(#fccae8 0%, #d59ac8bd); height: 55px;box-shadow: 0 0 8px rgb(255, 0, 162);"><i class="bi bi-list-task"></i> Employee Task Details</h1>
+  <hr>
+  <a href="/employeetask" class="btn  text-white" style="box-shadow: 0 0 8px rgb(255, 0, 191);background-color: #7c1c53bf;" role="button"><i class="bi bi-list-task"></i> Task</a>
+</div>
+<div class="container mt-4 text-center" style="width: 600px;color: #00fffb">
+  <h1 class="text" style="color: #0d6b6b;background-image: linear-gradient(#8ed0cd 0%, #40a5acdf); height: 55px;box-shadow: 0 0 8px rgb(0, 238, 255);"><i class="bi bi-wallet-fill"></i> Employee Payroll Details</h1>
+  <hr>
+  <a href="/employeepayroll" class="btn btn-info text-white" style="box-shadow: 0 0 8px #00fffb;background-color: #2a817ddf;" role="button"><i class="bi bi-wallet-fill"></i> Payroll</a>
+</div>
+<div class="container mt-4 text-center" style="width: 600px;color: #ff7b00">
+  <h1 class="text" style="color: #5b3b1d;background-image: linear-gradient(#d7ad97 0%, #c59167df); height: 55px;box-shadow: 0 0 8px #ff7b00;"><i class="bi bi-chat-right-text-fill"></i> Employee Feedback Details</h1>
+  <hr>
+  <a href="/employeefeedback" class="btn  text-white" style="box-shadow: 0 0 8px #ff7b00;background-color: #9b591fdf;" role="button"><i class="bi bi-chat-right-text-fill"></i> Feedback</a>
+</div>
+<div class="container mt-4 text-center" style="width: 600px;color: #8c00ff">
+  <h1 class="text" style="color: #3e1b64;background-image: linear-gradient(#cab5f4 0%, #a183c8df); height: 55px;box-shadow: 0 0 8px #8c00ff;"><i class="bi bi-person-check-fill"></i> Employee Attendance </h1>
+  <hr>
+  <a href="/attendance" class="btn  text-white" style="box-shadow: 0 0 8px #8c00ff;background-color: #6a4b84df;" role="button"><i class="bi bi-person-check-fill"></i> Attendance</a>
+</div>
+<div class="container mt-4 text-center" style="width: 600px;color: #00b3ff">
+  <h1 class="text" style="color: #093656;background-image: linear-gradient(#97cbe6 0%, #5b88b5df); height: 55px;box-shadow: 0 0 8px #00b3ff;"><i class="bi bi-person-bounding-box"></i> Employee Image Details</h1>
+  <hr>
+  <a href="/employeeimages" class="btn  text-white" style="box-shadow: 0 0 8px #00b3ff;background-color: #2c5674df;" role="button"><i class="bi bi-person-bounding-box"></i>  Images</a>
+</div>
+<div class="container mt-4 text-center" style="width: 600px;color: #a2d400">
+  <h1 class="text" style="color: #42520c;background-image: linear-gradient(#b8c490 0%, #a3b077); height: 55px;box-shadow: 0 0 8px #a2d400;"><i class="bi bi-geo-alt-fill"></i> University Location</h1>
+  <hr>
+  <a href="/location" class="btn  text-white" style="box-shadow: 0 0 8px #a2d400;background-color: #546910;" role="button"> <i class="bi bi-geo-alt-fill"></i> Location</a>
+</div>
+ 
+ 
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

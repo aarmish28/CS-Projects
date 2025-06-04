@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Result</title>
+    <style>
+        .result-box {
+           
+            padding: 20px; 
+            margin-top: 40px; 
+            margin-left:50px;
+            width: 1000px;
+            padding: 20px 25px;
+           
+            
+        }
+
+        .stars {
+            color: #ffb300;
+            font-size: 33px; 
+            text-shadow: 0 0 10px #ffb300, 0 0 20px #ffbb00, 0 0 30px #ffbb00; 
+            
+        }
+        body {
+           
+            margin: 0;
+            padding: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 20px;
+            color: black;
+
+        }
+    </style>
+</head>
+<body style="{% if sentiment == 'Slightly Positive' or sentiment == 'Positive' %} background-image: url('https://internationalwindsurfingtour.com/wp-content/uploads/2019/03/0hcx6Na.gif');{% elif sentiment == 'Neutral' %}background-image: url('https://internationalwindsurfingtour.com/wp-content/uploads/2019/03/JD0uZBq.gif');{% else %}background-image: url('https://media.giphy.com/media/KK1FaGv7c9rlC/source.gif');{% endif %}">
+
+    <div class="result-box" style="{% if sentiment == 'Slightly Positive' or sentiment == 'Positive' %} background-image: linear-gradient(rgb(141, 199, 141),rgb(168, 211, 168)) ; border-radius: 3px;box-shadow: 0 0 8px rgb(42, 251, 105) , 0 0 4px #9fff8f; border: 2px solid rgb(58, 218, 9); 
+    {% elif sentiment == 'Neutral' %} background-image: linear-gradient(rgb(255, 239, 133),rgb(255, 241, 152)); border-radius: 3px;box-shadow: 0 0 8px rgb(251, 247, 42) , 0 0 4px #f8ff8f; border: 2px solid rgb(246, 255, 0); 
+    {% else %}  background-image: linear-gradient(rgb(255, 142, 142),rgb(255, 99, 99)); border-radius: 3px;box-shadow: 0 0 8px rgb(255, 0, 0) , 0 0 4px #ff0000; border: 2px solid rgb(255, 0, 0){% endif %}">
+        <h2 >Review:</h2>
+        <p>{{ review }}</p>
+        <h2>Sentiment:</h2>
+        <p>{{ sentiment }}</p>
+        <h2>Stars:</h2>
+        <p class="stars">{% for _ in stars_list %}★{% endfor %}</p>
+    </div>
+</body>
+</html>

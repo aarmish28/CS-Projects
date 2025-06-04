@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Form</title>
+    <style>
+        /* styles.css */
+    
+    /* Basic styling for body */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+    
+    /* Header styling */
+    h1 {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+    }
+    
+    /* List styling */
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    li {
+        background-color: #fff;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    /* Form styling */
+    form {
+        margin: 20px 0;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    
+    input[type="submit"] {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    
+    /* Delete confirmation styling */
+    p {
+        margin-bottom: 15px;
+    }
+    
+    /* Links */
+    a {
+        color: #333;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    <h1>User Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ user.username|default:'' }}"><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ user.email|default:'' }}"><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br>
+        <input type="submit" value="Save">
+    </form>
+    <a href="{% url 'user_list' %}">Back to List</a>
+</body>
+</html>

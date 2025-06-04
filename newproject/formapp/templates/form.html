@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <title></title>
+  <style>
+    body {
+      background-image: url("https://images.pexels.com/photos/924824/pexels-photo-924824.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+
+
+    label {
+      display: block; /* Use block level to make labels take full width */
+      text-align: left;
+      font-weight: bolder;
+      color: rgb(254, 8, 8);
+      margin-bottom: 5px;
+    }
+    form {
+      display: flex;
+      justify-content: right;
+      flex-direction: column;
+     
+      box-sizing: border-box;
+     
+
+    }
+    .login-register-wrapper .login-form-container {
+        border-radius: 7px 7px 7px 7px;
+        background: #b7e5f3;
+        -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 0px 2px #00000042, #00000042 0px 1px 5px inset;
+        padding: 25px;
+        text-align: left;
+    }
+    
+  </style>
+</head>
+
+<div class="container mt-3 text-center" style="color: #ffffff">
+  <h1
+    style="box-shadow: 0 0 8px rgb(255, 255, 255) , 0 0 4px #ffffff; color: #ffffff;background-image: linear-gradient(#636162 0%, #4a4749df);height: 55px;">
+    <i class="bi bi-list-task"></i> University Admission Form </h1>
+
+
+  <hr>
+  <form method="post" action="{% url 'application' %}">
+    {% csrf_token %}
+
+    <div class="login-register-wrapper mt-3">
+      <div class="login-form-container">
+    <div class="login-register-form">
+      <div class="row">
+          <div class="col-md-6">
+              <label for="exampleInputEmail1" class="form-label text-red">Full Name *</label>
+              <input type="text" id="full_name_feild" class="d-block w-100 input-types form-control required_field tracker" placeholder="Usman Ali" name="full_name" required="" maxlength="25" onkeypress="return isAlphabet(event)">
+          </div>
+          <div class="col-md-6">
+              <label for="exampleInputEmail1" class="form-label text-red">Email ID *</label>
+              <input type="email" placeholder="sample@gmail.com" class=" required_field d-block w-100 input-types form-control tracker" name="email_id" id="emailInput" required="">
+              <div id="emailError" class="error-message" style="display: none;">Email is not valid</div>
+          </div>
+      </div>
+      <div class="row mt-3">
+          <div class="col-md-6">
+              <label for="exampleInputPassword1" class="form-label text-red">Phone No *</label>
+              <input type="text" placeholder="0321-123 4567" class=" required_field d-block w-100 input-types form-control tracker" name="phone_no" id="phoneNoInput" required="" onkeypress="return (event.charCode >= 48 &amp;&amp; event.charCode <= 57)" maxlength="13">
+              <div id="phoneNoError" class="error-message">Invalid Phone Number</div>
+          </div>
+          <div class="col-md-6" >
+              <label for="exampleInputPassword1" class="form-label text-red">Gender *</label>
+              <div class="d-flex">
+                  <div class="form-check-inline">
+                      <div class="custom-control custom-radio">
+                          <input type="radio" id="customRadio18" name="gender" class="custom-control-input tracker" value="male" required="">
+                          <label class="custom-control-label" for="customRadio18" style="color: #ffe942;font-weight: lighter;">Male</label>
+                      </div>
+                  </div>
+                  <div class="form-check-inline">
+                      <div class="custom-control custom-radio">
+                          <input type="radio" id="customRadio19" name="gender" class="custom-control-input tracker" value="female" required="">
+                          <label class="custom-control-label" for="customRadio19" style="color: #ffe942;font-weight: lighter;">Female</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+      <div class="row mt-3">
+          <div class="col-md-6 col-12">
+              <label for="exampleInputPassword1" class="form-label text-red">CNIC *</label>
+              <input type="text" placeholder="35201-1899487-8" class="d-block required_field w-100 input-types form-control tracker" name="cnic" required="" oninput="this.value = formatCNIC(this.value)" maxlength="15" id="cnicInput">
+              <div id="cnicError" class="error-message">CNIC should be at least 13 characters long</div>
+          </div>
+          <div class="col-md-6 col-12">
+              <label for="exampleInputEmail1" class="form-label text-red">Address *</label>
+              <input name="address" placeholder="House # 233 Street 23 Gulberg 111 Lahore " id="address" class="d-block w-100 input-types form-control tracker" type="text" required="">
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-6 pe-md-3 pe-1">
+              <label for="exampleInputEmail1" class="form-label text-red">City *</label>
+              <input name="city_name" placeholder="Lahore" id="city_name" class="d-block required_field w-100 input-types form-control tracker" type="text" >
+              
+          </div>
+          <div class="col-6 ps-md-3 ps-1">
+              <label for="exampleInputEmail1" class="form-label text-red">State *</label>
+              <select class="form-select required_field focus-visible tracker" aria-label="Default select example" name="state_name">
+                  <option value="Punjab">Punjab</option>
+                  <option value="Sindh">Sindh</option>
+                  <option value="Balochistan">Balochistan</option>
+                  <option value="Gilgit Baltistan">Gilgit Baltistan</option>
+                  <option value="Khyber Phakhtunkhwa">Khyber Phakhtunkhwa</option>
+                  
+              </select>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-6 pe-md-3 pe-1">
+              <label for="exampleInputEmail1" class="form-label text-red">Country *</label>
+              <select class="form-select focus-visible required_field tracker" aria-label="Default select example" name="country_name">
+                  <option value="Pakistan">Pakistan</option>
+                  
+                  
+              </select>
+          </div>
+          <div class="col-md-6 col-12">
+              <label for="exampleInputDate" class="form-label text-red">Date of Birth*</label>
+              <input name="date_of_birth" id="dob" class="d-block w-100 input-types form-control required_field tracker" type="date" required="">
+              <div id="dobError" class="error-message">Please Enter a Valid Year of Birth</div>
+          </div>
+      </div>
+  </div>
+
+
+
+  <div class="login-register-wrapper mt-3">
+    <div class="login-form-container">
+        <h3 class="fw-bold login-h1">Select Program</h3>
+        <hr>
+        <div class="login-register-form">
+            <!-- <form action="#" method="post"> -->
+            <label for="exampleInputEmail1" class="form-label text-red">Program Type
+                *</label>
+            <select id="programTypeS" class="form-select tracker" aria-label="Default select example" name="program_type" required="">
+
+                <option value="2">Bachelor</option>
+                <option value="3">ADP</option>
+
+            </select>
+            <label for="exampleInputEmail1" class="form-label text-red">Name of Program
+                *</label>
+            <select id="adpPrograms" class="form-select tracker" aria-label="Default select example" name="name_of_program" required="" style="display: none;">
+                
+                <option value="304">ADP Computer Networks</option>
+                
+                <option value="305">ADP Data Science and Big Data Analytics</option>
+                
+                <option value="306">ADP Cloud Computing</option>
+                
+                <option value="307">ADP Game Development</option>
+                
+                <option value="308">ADP Natural Language Processing</option>
+                
+                <option value="309">ADP Virtual &amp; Augmented Reality</option>
+                
+                <option value="310">ADP Software Engineering</option>
+                
+                <option value="311">ADP Information Technology</option>
+                
+                <option value="312">ADP Artificial Intelligence &amp; Machine Learning</option>
+                
+                <option value="313">ADP Cybersecurity &amp; Information Assurance</option>
+                
+                <option value="314">ADP Robotics and Automation</option>
+                
+                <option value="315">ADP Web &amp; Mobile Applications Development</option>
+                
+                <option value="316">ADP in Business Administration</option>
+                
+                <option value="317">ADP Digital Marketing</option>
+                
+                <option value="318">ADP Human Resource Management</option>
+                
+                <option value="319">ADP Entrepreneurship</option>
+                
+                <option value="320">ADP Tourism &amp; Hospitality Management</option>
+                
+                <option value="321">ADP Retail Management</option>
+                
+                <option value="322">ADP Global Trade &amp; OEM Manufacturing</option>
+                
+                <option value="323">ADP Brand Management</option>
+                
+                <option value="324">ADP Accounting &amp; Finance</option>
+                
+                <option value="325">ADP Real Estate Management</option>
+                
+                <option value="326">ADP Luxury Brand Management</option>
+                
+                <option value="327">ADP Aviation Management</option>
+                
+                <option value="328">ADP in Nutrition &amp; Dietetics</option>
+                
+                <option value="329">ADP in Healthcare Management</option>
+                
+                <option value="330">ADP in Media Studies</option>
+                
+                <option value="331">ADP in Mass Communication</option>
+                
+                <option value="332">ADP in Film and TV Production</option>
+                
+                <option value="333">ADP in Fashion Design</option>
+                
+                <option value="334">ADP in Interior Design</option>
+                
+                <option value="335">ADP in Textile Design</option>
+                
+                <option value="336">ADP in Architecture Design</option>
+                
+                <option value="337">ADP in Building &amp; Construction</option>
+                
+            </select>
+            <select id="bacholerPrograms" class="form-select tracker" aria-label="Default select example" name="name_of_program" required="">
+                
+                <option value="201">BSCS Computer Networks</option>
+                
+                <option value="202">BSCS Data Science and Big Data Analytics</option>
+                
+                <option value="203">BSCS Cloud Computing</option>
+                
+                <option value="204">BSCS Game Development</option>
+                
+                <option value="205">BSCS Natural Language Processing</option>
+                
+                <option value="206">BSCS Virtual &amp; Augmented Reality</option>
+                
+                <option value="207">BS Software Engineering</option>
+                
+                <option value="208">BS Information Technology</option>
+                
+                <option value="209">BSCS Artificial Intelligence &amp; Machine Learning</option>
+                
+                <option value="210">BSCS Cybersecurity &amp; Information Assurance</option>
+                
+                <option value="211">BSCS Robotics and Automation</option>
+                
+                <option value="212">BSCS Web &amp; Mobile Applications Development</option>
+                
+                <option value="213">BBA Bachelors in Business Administration</option>
+                
+                <option value="214">BS Digital Marketing</option>
+                
+                <option value="215">BS Human Resource Management</option>
+                
+                <option value="216">BS Entrepreneurship</option>
+                
+                <option value="217">BS Tourism &amp; Hospitality Management</option>
+                
+                <option value="218">BS Retail Management</option>
+                
+                <option value="219">BS Global Trade &amp; OEM Manufacturing</option>
+                
+                <option value="220">BS Brand Management</option>
+                
+                <option value="221">BS Accounting &amp; Finance</option>
+                
+                <option value="222">BS Real Estate Management</option>
+                
+                <option value="223">BS Luxury Brand Management</option>
+                
+                <option value="224">BS Aviation Management</option>
+                
+                <option value="225">BS in Nutrition &amp; Dietetics</option>
+                
+                <option value="226">Doctor of Physiotherapy (DPT)</option>
+                
+                <option value="227">BS in Healthcare Mnagement</option>
+                
+                <option value="228">Bachelors in Media Studies</option>
+                
+                <option value="229">Bachelors in Mass Communication</option>
+                
+                <option value="230">Bachelors in Film and TV Production</option>
+                
+                <option value="231">Bachelors in Fashion Design</option>
+                
+                <option value="232">Bachelors in Interior Design</option>
+                
+                <option value="233">Bachelors in Textile Design</option>
+                
+                <option value="234">Bachelors in Architecture Design</option>
+                
+                <option value="235">Bachelors in Building &amp; Construction</option>
+                
+            </select>
+            
+            <div id="associate" class="col-md-12" style="display:none ;">
+                <select class="form-select tracker" aria-label="Default select example">
+
+                    <option value="1" selected="">ADP Computer Science
+                    </option>
+                    <option value="2">ADP Software Engineering</option>
+                    <option value="3">ADP Artificial Intelligence</option>
+                    <option value="4">ADP Digital Marketing</option>
+                    <option value="5">ADP Business Administration</option>
+                    <option value="6">ADP Aviation Management</option>
+                    <option value="7">ADP Nutrition &amp; Dietetics</option>
+                    <option value="8">ADP Physiotherapy</option>
+                    <option value="9">ADP Media Studies</option>
+                    <option value="10">ADP Fashion Design</option>
+                    <option value="11">ADP Textile Design</option>
+                    <option value="12">ADP Interior Design</option>
+                    <option value="13">ADP Building &amp; Construction</option>
+                    <option value="14">ADP Commerce</option>
+                    <option value="15">Others</option>
+                </select>
+            </div>
+            <div id="Master" class="col-md-12" style="display:none ;">
+                <select class="form-select tracker" aria-label="Default select example">
+                    <option value="1" selected="">MBA Global
+                    </option>
+                    <option value="2">MBA Digital Marketing</option>
+                    <option value="3">MBA Marketing</option>
+                    <option value="4">MBA Finance</option>
+                    <option value="5">MS Computer Science</option>
+                    <option value="6">MS Software Engineering</option>
+                    <option value="7">MS Artificial Intelligence</option>
+                    <option value="8">MS Aviation Management</option>
+                    <option value="9">MS Nutrition &amp; Dietetics</option>
+                    <option value="10">MS Media Studies</option>
+                    <option value="11">MS Fashion Design</option>
+                    <option value="12">MS Textile Design</option>
+                    <option value="13">MS Interior Design</option>
+                    <option value="14">MS Architecture</option>
+                    <option value="15">MS Building &amp; Construction</option>
+                    <option value="16">Others</option>
+                </select>
+            </div>
+            <div id="Diploma" class="col-md-12" style="display:none ;">
+                <select class="form-select tracker" aria-label="Default select example">
+                    <option value="1" selected="">Digital Marketing
+                    </option>
+                    <option value="2">Journalism &amp; Digital Marketing</option>
+                    <option value="3">Software Engg</option>
+                    <option value="4">Web Development</option>
+                </select>
+            </div>
+            <div id="Certification" class="col-md-12" style="display:none ;">
+                <select class="form-select tracker" aria-label="Default select example">
+                    <option value="1" selected="">Social Media Advertising
+                    </option>
+                    <option value="2">Spoken English</option>
+                    <option value="3">Certificate in Graphics, Animation &amp; Videography
+                    </option>
+                    <option value="4">Web Design Using WordPress</option>
+                </select>
+            </div>
+            <label for="exampleInputEmail1" class="form-label text-red">Reason to
+                Join*</label>
+            <select id="test" class="form-select tracker" aria-label="Default select example" name="reason_to_join" required="">
+                <option value="Additional Skill">Additional Skill</option>
+                <option value="Passive Income">Passive Income</option>
+                <option value="Career Path">Career Path</option>
+                <option value="Increased Income">Increased Income</option>
+                <option value="Acquire Degree">Acquire Degree</option>
+                <option value="Acquire Knowledge">Acquire Knowledge</option>
+            </select>
+
+
+            <!-- </form> -->
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="login-register-wrapper mt-3">
+                                
+  <div class="login-register-wrapper mt-3">
+      <div class="login-form-container">
+          <h1 class="mb-0 fw-bold academic-h1">Academic Information</h1>
+          <hr class="mt-md-3 mt-0">
+          <h3 class="fw-bold login-h1">Matric or Equivalent</h3>
+          <hr>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <label for="exampleInputEmail1" class="form-label text-red">Type of Certification*</label>
+                          <select id="degree-level" class="form-select tracker" aria-label="Default select example" name="degree_level" >
+                              <option value="Matric">Matric</option>
+                              <option value="O-Levels">O-Levels</option>
+                              <option value="MYP Program">MYP Program</option>
+                          </select>
+                      </div>
+
+                      <div class="col-md-6">
+                          <label for="exampleInputEmail1" class="form-label text-red" id="subject-group-label">Subject-Group*</label>
+                          <select id="subject-group" class="form-select tracker" aria-label="Default select example" name="matric_subject_group" >
+                              <option value="Science">Science</option>
+                              <option value="Computer Science">Computer Science</option>
+                              <option value="Arts">Arts</option>
+                          </select>
+
+                          <div id="O-level" class="col-md-12" style="display: none;">
+                              
+
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="o_level_subject_group_1" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="o_level_subject_group_2" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="o_level_subject_group_3" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="o_level_subject_group_4" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="o_level_subject_group_5" placeholder="Enter Subject Name">
+                                  <div class="form-check mt-2">
+                                      <input class="form-check-input tracker" type="checkbox" value="English" id="flexCheckDefault" name="o_level_subject_group_english">
+                                      <label class="form-check-label" for="flexCheckDefault">
+                                          English
+                                      </label>
+                                  </div>
+                                  <div class="form-check mt-2">
+                                      <input class="form-check-input tracker" type="checkbox" value="Urdu" id="flexCheckDefault" name="o_level_subject_group_urdu">
+                                      <label class="form-check-label" for="flexCheckDefault">
+                                          Urdu
+                                      </label>
+                                  </div>
+                                  <div class="form-check mt-2">
+                                      <input class="form-check-input tracker" type="checkbox" value="Pakistan Studies" id="flexCheckDefault" name="o_level_subject_group_pak">
+                                      <label class="form-check-label" for="flexCheckDefault">
+                                          Pakistan Studies
+                                      </label>
+                                  </div>
+                                  <div class="form-check mt-2">
+                                      <input class="form-check-input tracker" type="checkbox" value="Islamiyat" id="flexCheckDefault" name="o_level_subject_group_islamiyat">
+                                      <label class="form-check-label" for="flexCheckDefault">
+                                          Islamiyat
+                                      </label>
+                                  </div>
+                              
+                          </div>
+                          <div id="MYP" class="col-md-12" style="display: none;">
+                              
+
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="mvp_subject_group_1" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="mvp_subject_group_2" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="mvp_subject_group_3" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="mvp_subject_group_4" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="mvp_subject_group_5" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="mvp_subject_group_6" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="mvp_subject_group_7" placeholder="Enter Subject Name">
+                                  <input type="text" class="form-control mt-2 tracker" id="example" name="mvp_subject_group_8" placeholder="Enter Subject Name">
+                                  <div class="form-check mt-2">
+                                      <input class="form-check-input tracker" type="checkbox" value="English" id="flexCheckDefault" name="mvp_subject_group_English">
+                                      <label class="form-check-label" for="flexCheckDefault">
+                                          English
+                                      </label>
+                                  </div>
+                                  <div class="form-check mt-2">
+                                      <input class="form-check-input tracker" type="checkbox" value="Urdu" id="flexCheckDefault" name="mvp_subject_group_Urdu">
+                                      <label class="form-check-label" for="flexCheckDefault">
+                                          Urdu
+                                      </label>
+                                  </div>
+                                  <div class="form-check mt-2">
+                                      <input class="form-check-input tracker" type="checkbox" value="Pakistan Studies" id="flexCheckDefault" name="mvp_subject_group_Pakistan">
+                                      <label class="form-check-label" for="flexCheckDefault">
+                                          Pakistan Studies
+                                      </label>
+                                  </div>
+                                  <div class="form-check mt-2">
+                                      <input class="form-check-input tracker" type="checkbox" value="Islamiyat" id="flexCheckDefault" name="mvp_subject_group_Islamiyat">
+                                      <label class="form-check-label" for="flexCheckDefault">
+                                          Islamiyat
+                                      </label>
+                                  </div>
+                              
+                          </div>
+                      </div>
+                      <div class="row m-0">
+                          <label for="exampleInputEmail1" class="form-label text-red p-0">Name of Institute *</label>
+                          <input type="text" class="d-block w-100 input-types form-control required_field tracker" placeholder="Beacon House School System" name="school_name" required="">
+                      </div>
+                      <div class="row">
+                          <div class="col-6 pe-md-3 pe-1">
+                              <label for="exampleInputEmail1" class="form-label text-red">From</label>
+
+                              <select id="matric_degree_starting_date" class="form-select tracker" name="starting_year" required="">
+                                  
+                                  <option value="2023">2023</option>
+                                  <option value="2022">2022</option>
+                                  <option value="2021">2021</option>
+                                  <option value="2020">2020</option>
+                                  <option value="2019" selected="">2019</option>
+                                  <option value="2018">2018</option>
+                                  <option value="2017">2017</option>
+                                  <option value="2016">2016</option>
+                                  <option value="2015">2015</option>
+                                  <option value="2014">2014</option>
+                                  <option value="2013">2013</option>
+                                  <option value="2012">2012</option>
+                                  <option value="2011">2011</option>
+                                  <option value="2010">2010</option>
+                                  <option value="2009">2009</option>
+                                  <option value="2008">2008</option>
+                                  <option value="2007">2007</option>
+                                  <option value="2006">2006</option>
+                                  <option value="2005">2005</option>
+                                  <option value="2004">2004</option>
+                                  <option value="2003">2003</option>
+                                  <option value="2002">2002</option>
+                                  <option value="2001">2001</option>
+                                  <option value="2000">2000</option>
+                                  <option value="1999">1999</option>
+                                  <option value="1998">1998</option>
+                                  <option value="1997">1997</option>
+                                  <option value="1996">1996</option>
+                                  <option value="1995">1995</option>
+                                  <option value="1994">1994</option>
+                                  <option value="1993">1993</option>
+                                  <option value="1992">1992</option>
+                                  <option value="1991">1991</option>
+                                  <option value="1990">1990</option>
+                                  <option value="1989">1989</option>
+                                  <option value="1988">1988</option>
+                                  <option value="1987">1987</option>
+                                  <option value="1986">1986</option>
+                                  <option value="1985">1985</option>
+                                  <option value="1984">1984</option>
+                                  <option value="1983">1983</option>
+                                  <option value="1982">1982</option>
+                                  <option value="1981">1981</option>
+                                  <option value="1980">1980</option>
+                                  <option value="1979">1979</option>
+                                  <option value="1978">1978</option>
+                                  <option value="1977">1977</option>
+                                  <option value="1976">1976</option>
+                                  <option value="1975">1975</option>
+                                  <option value="1974">1974</option>
+                                  <option value="1973">1973</option>
+                                  <option value="1972">1972</option>
+                                  <option value="1971">1971</option>
+                                  <option value="1970">1970</option>
+                                  <option value="1969">1969</option>
+                                  <option value="1968">1968</option>
+                                  <option value="1967">1967</option>
+                                  <option value="1966">1966</option>
+                                  <option value="1965">1965</option>
+                                  <option value="1964">1964</option>
+                                  <option value="1963">1963</option>
+                                  <option value="1962">1962</option>
+                                  <option value="1961">1961</option>
+                                  <option value="1960">1960</option>
+                                  <option value="1959">1959</option>
+                                  <option value="1958">1958</option>
+                                  <option value="1957">1957</option>
+                                  <option value="1956">1956</option>
+                                  <option value="1955">1955</option>
+                                  <option value="1954">1954</option>
+                                  <option value="1953">1953</option>
+                                  <option value="1952">1952</option>
+                                  <option value="1951">1951</option>
+                                  <option value="1950">1950</option>
+                                  
+                              </select>
+                          </div>
+                          <div class="col-6 ps-md-3 ps-1">
+                              <label for="exampleInputEmail1" class="form-label text-red">To</label>
+                              <select id="matric_degree_ending_date" class="form-select tracker" name="ending_year" required="">
+                                  
+                                  <option value="2023">2023</option>
+                                  <option value="2022">2022</option>
+                                  <option value="2021" selected="">2021</option>
+                                  <option value="2020">2020</option>
+                                  <option value="2019">2019</option>
+                                  <option value="2018">2018</option>
+                                  <option value="2017">2017</option>
+                                  <option value="2016">2016</option>
+                                  <option value="2015">2015</option>
+                                  <option value="2014">2014</option>
+                                  <option value="2013">2013</option>
+                                  <option value="2012">2012</option>
+                                  <option value="2011">2011</option>
+                                  <option value="2010">2010</option>
+                                  <option value="2009">2009</option>
+                                  <option value="2008">2008</option>
+                                  <option value="2007">2007</option>
+                                  <option value="2006">2006</option>
+                                  <option value="2005">2005</option>
+                                  <option value="2004">2004</option>
+                                  <option value="2003">2003</option>
+                                  <option value="2002">2002</option>
+                                  <option value="2001">2001</option>
+                                  <option value="2000">2000</option>
+                                  <option value="1999">1999</option>
+                                  <option value="1998">1998</option>
+                                  <option value="1997">1997</option>
+                                  <option value="1996">1996</option>
+                                  <option value="1995">1995</option>
+                                  <option value="1994">1994</option>
+                                  <option value="1993">1993</option>
+                                  <option value="1992">1992</option>
+                                  <option value="1991">1991</option>
+                                  <option value="1990">1990</option>
+                                  <option value="1989">1989</option>
+                                  <option value="1988">1988</option>
+                                  <option value="1987">1987</option>
+                                  <option value="1986">1986</option>
+                                  <option value="1985">1985</option>
+                                  <option value="1984">1984</option>
+                                  <option value="1983">1983</option>
+                                  <option value="1982">1982</option>
+                                  <option value="1981">1981</option>
+                                  <option value="1980">1980</option>
+                                  <option value="1979">1979</option>
+                                  <option value="1978">1978</option>
+                                  <option value="1977">1977</option>
+                                  <option value="1976">1976</option>
+                                  <option value="1975">1975</option>
+                                  <option value="1974">1974</option>
+                                  <option value="1973">1973</option>
+                                  <option value="1972">1972</option>
+                                  <option value="1971">1971</option>
+                                  <option value="1970">1970</option>
+                                  <option value="1969">1969</option>
+                                  <option value="1968">1968</option>
+                                  <option value="1967">1967</option>
+                                  <option value="1966">1966</option>
+                                  <option value="1965">1965</option>
+                                  <option value="1964">1964</option>
+                                  <option value="1963">1963</option>
+                                  <option value="1962">1962</option>
+                                  <option value="1961">1961</option>
+                                  <option value="1960">1960</option>
+                                  <option value="1959">1959</option>
+                                  <option value="1958">1958</option>
+                                  <option value="1957">1957</option>
+                                  <option value="1956">1956</option>
+                                  <option value="1955">1955</option>
+                                  <option value="1954">1954</option>
+                                  <option value="1953">1953</option>
+                                  <option value="1952">1952</option>
+                                  <option value="1951">1951</option>
+                                  <option value="1950">1950</option>
+                              
+                              </select>
+                          </div>
+                          <div id="yearError" class="error-message">Passing year should  be Greater than starting year.</div>
+                      </div>
+                      <div class="row">
+                          <div class="col-6 pe-md-3 pe-1">
+                              <label for="exampleInputEmail1" class="form-label text-red">Obtained Marks *</label>
+                              <input type="text" class="d-block w-100 input-types form-control required_field tracker matric_marks" placeholder="800" name="obtained_marks" required="" maxlength="4" onkeypress="return (event.charCode >= 48 &amp;&amp; event.charCode <= 57)">
+                          </div>
+                          <div class="col-6 ps-md-3 ps-1">
+                              <label for="exampleInputEmail1" class="form-label text-red">Total Marks *</label>
+                              <input type="text" class="d-block w-100 input-types form-control required_field tracker" placeholder="1100" name="total_marks" required="" maxlength="4" onkeypress="return (event.charCode >= 48 &amp;&amp; event.charCode <= 57)">
+                          </div>
+                          <div id="marksError" class="error-message">Obtained marks cannot be greater than total marks or total marks cannot
+                              exceed 1100.</div>
+                      </div>
+
+
+                  </div>
+              </div>
+          </div>  
+
+            
+  
+          </div>
+          <div class="login-register-wrapper mt-3">
+            <div class="login-form-container">
+                <h3 class="fw-bold login-h1">Intermediate or Equivalent</h3>
+                <hr>
+                <div class="login-register-form">
+                    <!-- <form action="#" method="post"> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="exampleInputEmail1" class="form-label text-red">Name of
+                                Certification
+                                *</label>
+                            <select id="inter_degree-level" class="form-select tracker" aria-label="Default select example" name="degree_level" required="">
+                                <option value="Inter">Intermediate</option>
+                                <option value="A-Levels">A-Levels</option>
+                                <option value="DP Program">DP Program</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label for="exampleInputEmail1" class="form-label text-red" id="inter_subject-group-label">Subject-Group*</label>
+                            <select id="inter_subject-group" class="form-select tracker" aria-label="Default select example" name="subject_group" required="">
+                                <option value="Pre-Medical">Pre Medical</option>
+                                <option value="Pre-Engineering">Pre Engineering</option>
+                                <option value="Art &amp; Humanities">Art &amp; Humanities</option>
+                                <option value="Intermediate with CS (ICS)">Intermediate with CS (ICS)</option>
+                                <option value="I.com">I.Com</option>
+                                <option value="DAE Program">DAE Program</option>
+                            </select>
+
+                            
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <label for="exampleInputEmail1" class="form-label text-red p-0">Name of Institute *</label>
+                        <input type="text" class="d-block w-100 input-types form-control required_field tracker" placeholder="Beacon House School System" name="institute_name" required="">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 pe-md-3 pe-1">
+                            <label for="exampleInputEmail1" class="form-label text-red">From</label>
+                            <!-- <input  type="date" class="d-block w-100 input-types form-control" name="inter_degree_starting_date" > -->
+                            <select id="inter_degree_starting_date" class="form-select tracker" name="starting_year" required="">
+                                
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021" selected="">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>
+                                <option value="2011">2011</option>
+                                <option value="2010">2010</option>
+                                <option value="2009">2009</option>
+                                <option value="2008">2008</option>
+                                <option value="2007">2007</option>
+                                <option value="2006">2006</option>
+                                <option value="2005">2005</option>
+                                <option value="2004">2004</option>
+                                <option value="2003">2003</option>
+                                <option value="2002">2002</option>
+                                <option value="2001">2001</option>
+                                <option value="2000">2000</option>
+                                <option value="1999">1999</option>
+                                <option value="1998">1998</option>
+                                <option value="1997">1997</option>
+                                <option value="1996">1996</option>
+                                <option value="1995">1995</option>
+                                <option value="1994">1994</option>
+                                <option value="1993">1993</option>
+                                <option value="1992">1992</option>
+                                <option value="1991">1991</option>
+                                <option value="1990">1990</option>
+                                <option value="1989">1989</option>
+                                <option value="1988">1988</option>
+                                <option value="1987">1987</option>
+                                <option value="1986">1986</option>
+                                <option value="1985">1985</option>
+                                <option value="1984">1984</option>
+                                <option value="1983">1983</option>
+                                <option value="1982">1982</option>
+                                <option value="1981">1981</option>
+                                <option value="1980">1980</option>
+                                <option value="1979">1979</option>
+                                <option value="1978">1978</option>
+                                <option value="1977">1977</option>
+                                <option value="1976">1976</option>
+                                <option value="1975">1975</option>
+                                <option value="1974">1974</option>
+                                <option value="1973">1973</option>
+                                <option value="1972">1972</option>
+                                <option value="1971">1971</option>
+                                <option value="1970">1970</option>
+                                <option value="1969">1969</option>
+                                <option value="1968">1968</option>
+                                <option value="1967">1967</option>
+                                <option value="1966">1966</option>
+                                <option value="1965">1965</option>
+                                <option value="1964">1964</option>
+                                <option value="1963">1963</option>
+                                <option value="1962">1962</option>
+                                <option value="1961">1961</option>
+                                <option value="1960">1960</option>
+                                <option value="1959">1959</option>
+                                <option value="1958">1958</option>
+                                <option value="1957">1957</option>
+                                <option value="1956">1956</option>
+                                <option value="1955">1955</option>
+                                <option value="1954">1954</option>
+                                <option value="1953">1953</option>
+                                <option value="1952">1952</option>
+                                <option value="1951">1951</option>
+                                <option value="1950">1950</option>
+                            
+                            </select>
+
+                        </div>
+                        <div class="col-6 ps-md-3 ps-1">
+                            <label for="exampleInputEmail1" class="form-label text-red">To</label>
+                            <!-- <input  type="date" class="d-block w-100 input-types form-control" name="inter_degree_ending_date" > -->
+                            <select id="inter_degree_ending_date" class="form-select tracker" name="ending_year" required="">
+                                
+                                    <option value="2023" selected="">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2010">2010</option>
+                                    <option value="2009">2009</option>
+                                    <option value="2008">2008</option>
+                                    <option value="2007">2007</option>
+                                    <option value="2006">2006</option>
+                                    <option value="2005">2005</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2001">2001</option>
+                                    <option value="2000">2000</option>
+                                    <option value="1999">1999</option>
+                                    <option value="1998">1998</option>
+                                    <option value="1997">1997</option>
+                                    <option value="1996">1996</option>
+                                    <option value="1995">1995</option>
+                                    <option value="1994">1994</option>
+                                    <option value="1993">1993</option>
+                                    <option value="1992">1992</option>
+                                    <option value="1991">1991</option>
+                                    <option value="1990">1990</option>
+                                    <option value="1989">1989</option>
+                                    <option value="1988">1988</option>
+                                    <option value="1987">1987</option>
+                                    <option value="1986">1986</option>
+                                    <option value="1985">1985</option>
+                                    <option value="1984">1984</option>
+                                    <option value="1983">1983</option>
+                                    <option value="1982">1982</option>
+                                    <option value="1981">1981</option>
+                                    <option value="1980">1980</option>
+                                    <option value="1979">1979</option>
+                                    <option value="1978">1978</option>
+                                    <option value="1977">1977</option>
+                                    <option value="1976">1976</option>
+                                    <option value="1975">1975</option>
+                                    <option value="1974">1974</option>
+                                    <option value="1973">1973</option>
+                                    <option value="1972">1972</option>
+                                    <option value="1971">1971</option>
+                                    <option value="1970">1970</option>
+                                    <option value="1969">1969</option>
+                                    <option value="1968">1968</option>
+                                    <option value="1967">1967</option>
+                                    <option value="1966">1966</option>
+                                    <option value="1965">1965</option>
+                                    <option value="1964">1964</option>
+                                    <option value="1963">1963</option>
+                                    <option value="1962">1962</option>
+                                    <option value="1961">1961</option>
+                                    <option value="1960">1960</option>
+                                    <option value="1959">1959</option>
+                                    <option value="1958">1958</option>
+                                    <option value="1957">1957</option>
+                                    <option value="1956">1956</option>
+                                    <option value="1955">1955</option>
+                                    <option value="1954">1954</option>
+                                    <option value="1953">1953</option>
+                                    <option value="1952">1952</option>
+                                    <option value="1951">1951</option>
+                                    <option value="1950">1950</option>
+                            
+                            </select>
+                        </div>
+                        <div id="InteryearError" class="error-message">Passing year should be Greater than starting year.</div>
+                    </div>
+                    <div class="row" id="inter_obtained">
+                        <div class="col-6 pe-md-3 pe-1">
+                          <label for="exampleInputEmail1" class="form-label text-red">Part 1 Obtained Marks *</label>
+                          <input type="number" placeholder="400" class="d-block w-100 input-types form-control tracker inter-marks" name="part_one_obtained_marks" required="" maxlength="4">
+                        </div>
+                        <div class="col-6 ps-md-3 ps-1">
+                          <label for="exampleInputEmail1" class="form-label text-red">Part 2 Obtained Marks</label>
+                          <input type="number" placeholder="450" class="d-block w-100 input-types form-control tracker inter-marks" name="part_two_obtained_marks" maxlength="4">
+                        </div>
+                    </div>                                                  
+                  
+                        <div id="percentageError" class="error-message">Obtained marks percentage cannot be greater than total marks percentage or total marks percentage cannot exceed 100%.</div>
+                    </div>
+
+                  
+        
+                </div>
+                
+            </div>
+        </div>
+        <div class="login-register-wrapper mt-3">
+            <div class="login-form-container">
+                <h3 class="fw-bold login-h1">Scholarships</h3>
+                <hr>
+                <div class="login-register-form">
+                    <form action="#" method="post">
+                        <div class="login-register-wrapper mt-3">
+                            <div class="login-form-container">
+                                <h3 class="fw-bold login-h1">Scholarships</h3>
+                                <hr>
+                                <div class="login-register-form">
+                                    <form action="#" method="post">
+                                        <div class="row merit">
+                                            <label class="form-label text-red" for="scholarship_merit">Want to Apply for a Merit-Based Scholarship?</label>
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-5 d-flex align-items-center">
+                                                    <input class="me-2" type="radio" name="merit_based" id="scholarship_merit_yes" value="True">
+                                                    <label for="scholarship_merit_yes">Yes</label>
+                                                </div>
+                                                <div class="">
+                                                    <input class="me-2" type="radio" name="merit_based" id="scholarship_merit_no" value="False">
+                                                    <label for="scholarship_merit_no">No</label>
+                                                </div>
+                                            </div>
+                                            <h5 class="mt-2">100% Merit-Based Scholarship</h5>
+                                        </div>
+                                        <div class="row intern">
+                                            <label class="form-label text-red" for="scholarship_intern">Want to Apply for an Internship-Based Scholarship?</label>
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-5 d-flex align-items-center">
+                                                    <input class="me-2" type="radio" name="internship_based" id="scholarship_intern_yes" value="True">
+                                                    <label for="scholarship_intern_yes">Yes</label>
+                                                </div>
+                                                <div class="">
+                                                    <input class="me-2" type="radio" name="internship_based" id="scholarship_intern_no" value="False">
+                                                    <label for="scholarship_intern_no">No</label>
+                                                </div>
+                                            </div>
+                                            <h5 class="mt-2">50% Internship-Based Scholarship</h5>
+                                        </div>
+                                        <div class="row earn">
+                                            <label class="form-label text-red" for="scholarship_earn">Want to Apply for an Earn While You Learn Scholarship?</label>
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-5 d-flex align-items-center">
+                                                    <input class="me-2" type="radio" name="earn_while_you_learn'" id="scholarship_earn_yes" value="True">
+                                                    <label for="scholarship_earn_yes">Yes</label>
+                                                </div>
+                                                <div class="">
+                                                    <input class="me-2" type="radio" name="earn_while_you_learn'" id="scholarship_earn_no" value="False">
+                                                    <label for="scholarship_earn_no">No</label>
+                                                </div>
+                                            </div>
+                                            <h5 class="mt-2">25% Earn While You Learn Scholarship</h5>
+                                        </div>
+                                        <div class="row kin">
+                                            <label class="form-label text-red" for="scholarship_kin">Do You Have Any Kin (Brother/Sister) Already Studying in Our Institute?</label>
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-5 d-flex align-items-center">
+                                                    <input class="me-2" type="radio" name="kin_already_studying'" id="scholarship_kin_yes" value="True">
+                                                    <label for="scholarship_kin_yes">Yes</label>
+                                                </div>
+                                                <div class="">
+                                                    <input class="me-2" type="radio" name="kin_already_studying'" id="scholarship_kin_no" value="False">
+                                                    <label for="scholarship_kin_no">No</label>
+                                                </div>
+                                            </div>
+                                            <h5 class="mt-2">10% Kin Scholarship</h5>
+                                        </div>
+                                        <p class="initial mt-4"><span class="fw-bold">Note: </span>This is an initial application. Students who get admitted will be required to fill a detailed form.</p>
+                                        <div class="text-end mt-3 mb-3">
+                                            <button type="submit" class="btn" style="box-shadow: 0 0 8px rgb(255, 255, 255) , 0 0 4px #dfdfdf; color: #ffffff;background-image: linear-gradient(#404141 0%, #696c71df);">
+                                                <i class="bi bi-list-task"></i> Submit
+                                            </button>
+                                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        
+  </form>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form List</title>
+    <style>
+        /* Reset some default styles */
+    body, h1, h2, p, ul {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: Arial, sans-serif;
+     
+         background-image: url("https://images.pexels.com/photos/2004166/pexels-photo-2004166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-size: cover;
+     
+    }
+    
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-image: linear-gradient(#342d34 0%, #17131cdf);
+        box-shadow: 0px 0px 10px rgb(119, 0, 255);
+        color: #ffffff;
+    }
+    
+    header {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+    }
+    
+    nav {
+        margin-top: 20px;
+    }
+    
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+    }
+    
+    nav li {
+        margin: 0 15px;
+    }
+    
+    a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s;
+        border-radius: 10px;
+      padding: 10px;
+      margin-top: 15px;
+      width: 35%;
+      border: none;
+      outline: none;
+        
+    }
+    
+    a:hover {
+        color: #0056b3;
+    }
+    
+    h1 {
+        color: #ffffff;
+        margin-bottom: 20px;
+    }
+    
+    .card {
+        background-color: #ffffff;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-title {
+        color: #007bff;
+    }
+    
+    .submissions-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .submissions-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .profile {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .profile-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-right: 20px;
+    }
+    
+    .profile-details {
+        flex: 1;
+    }
+    
+    .profile-username {
+        font-size: 24px;
+        color: #ffffff;
+    }
+    
+    .profile-bio {
+        color: #ffffff;
+    }
+
+     input{
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 15px;
+      width: 35%;
+      border: none;
+      outline: none;
+     }
+     input:focus{
+      border: #ccc;
+      transform: scale(1.02);
+      box-shadow: 0 0 8px rgb(255, 0, 0);
+     }
+     ::placeholder{
+      padding-left: 20px;
+     }
+     input:focus + .placeholder
+    {
+      top: -10px;
+      color: #04AA6D;
+      background-color: #fff;
+    }
+    label{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 150px;
+      font-weight: bolder;
+      font-size: 20px;
+      color: black;
+      padding: 10px 10px 0px 4px;
+    }
+  form{
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+    margin-top: 50px;
+    box-sizing: border-box;
+    padding: 20px;
+  
+  }
+  button{
+    width: 230px;
+    height: 40px;
+    margin: 10px auto;
+    border-radius: 10px;
+      padding: 10px;
+      margin-top: 25px;
+      
+   
+  }
+  .data{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       }
+   
+    </style>
+</head>
+<body>
+    <header style="color: #be0000;background-image: linear-gradient(#22152c 0%, #292139df);box-shadow: 0 0 8px rgb(93, 0, 255) , 0 0 4px #1900ff;margin-top: 5px;">
+        <h1>Form CRUD Operations</h1>
+    </header>
+
+    <div class="container" style="margin-top: 50px;">
+        <h2 style="text-shadow: 0 0 8px rgb(255, 128, 0) , 0 0 4px #ab6e0b; font-size: 33px; color: #ffffff;">Forms</h2><br><br>
+        <ul class="forms-list" style="color: #4900be;background-image: linear-gradient(#d9cffd 0%, #c6bbffdf);box-shadow: 0 0 8px rgb(64, 0, 255) , 0 0 4px #2600ff;height: 60px;">
+            {% for form in forms %}
+                <li>
+                    <a href="#">{{ form.title }}</a>
+                    <a href="{% url 'edit_form' form.id %}" class="edit-btn" style="color: #3c00ff;">Edit</a>
+                    <a href="{% url 'delete_form' form.id %}" class="delete-btn" style="color: #be0000;">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <br><br>
+
+        <h2 style="text-shadow: 0 0 8px rgb(255, 128, 0) , 0 0 4px #ab6e0b; font-size: 33px; color: #ffffff;margin-bottom: -35px;" >Create Form</h2>
+        <form method="post" action="{% url 'create_form' %}" class="create-form">
+            {% csrf_token %}
+            <div class="data"><label for="title" style="text-shadow: 0 0 8px rgb(0, 255, 140) , 0 0 4px #0bab68; font-size: 23px; color: #ffffff;">Title:</label>
+                <input type="text"name="title" required><br> <br></div>
+                <div class="data"><label for="description" class="text" style="text-shadow: 0 0 8px rgb(0, 255, 140) , 0 0 4px #0bab68; font-size: 23px; color: #ffffff;"> <b>Description: </b></label> <br>
+                <input id="description" name="description" placeholder="Enter Your Description" type="text" style="height: 100px;"><br></div>
+          
+                <button type="submit" class="form-button" style="box-shadow: 0 0 8px rgb(21, 0, 255) , 0 0 4px #0bab68; color: #02027e;background-image: linear-gradient(#b8e2cd 0%, #7fedafdf);">Create</button>
+            </form>
+    </div>
+</body>
+</html>
