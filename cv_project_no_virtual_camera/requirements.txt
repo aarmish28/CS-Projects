@@ -1,0 +1,20 @@
+# =========================================================
+# Computer Vision Project requirements
+# =========================================================
+# NOTE:
+# Use Python 3.10 or 3.11 64-bit for the smoothest installation.
+# MediaPipe and pyvirtualcam are usually much happier on those versions.
+#
+# Install with:
+#   python -m pip install --upgrade pip setuptools wheel
+#   pip install -r requirements.txt
+# =========================================================
+
+numpy
+opencv-python
+matplotlib
+pillow
+pyvirtualcam
+keyboard
+scipy
+mediapipe
